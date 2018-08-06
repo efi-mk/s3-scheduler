@@ -5,13 +5,13 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="s3_scheduler",
-    version="0.0.1",
+    version="0.0.2",
     author="Efi Merdler-Kravitz",
     author_email="efi.merdler@gmail.com",
     description="Use S3 as a scheduler mechanism using Lambda",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/pypa/sampleproject",
+    url="https://github.com/efi-mk/s3-scheduler",
     packages=setuptools.find_packages(),
     classifiers=(
         "Programming Language :: Python :: 3",
