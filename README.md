@@ -8,16 +8,50 @@
 
 The library uses AWS builtin capability to run every 1 minute. The configuration depends on your framework. For example for Zappa use
 
-<script src="https://gist.github.com/efi-mk/0d3a21556f7b47423b18cca74e3bc3d1.js"></script>
+`s3_events.py`
+```python
+
+scheduler = Scheduler(...)
+def check_scheduled_events():
+    scheduler.handle()
+```
+
+`zappa_settings.json`
+```json
+{
+  "production": {
+    "events": [
+      {
+        "function": "utils.s3_events.check_scheduled_events",
+        "expression": "rate(1 minute)"
+      }
+    ]
+  }
+}
+```
 
 ### Scheduling
 
-<script src="https://gist.github.com/efi-mk/539440cb03b23b05d2ea86df530fe580.js"></script>
+```
+import boto3
+from s3_scheduler.scheduler import Scheduler
+from s3_scheduler.utils import nowut
+s3_resource = boto3.resource("s3")
+s3_client = boto3.client("s3")
+scheduler = Scheduler("bucket", "/path", s3_resource, s3_client)
+time = nowut() + timedelta(minutes=10)
+upload_to = scheduler.schedule(time, "s3-bucket", "s3_files-important", "content")
+```
 During initialization the scheduler requires the bucket and folder in which to keep the actual scheduling details. Remember, each event is a separate file, therefore there is a need to save them somewhere. When to schedule is a simple `datetime` object.
 
 ### Stopping
 
-<script src="https://gist.github.com/efi-mk/d0e6ed2dd80988c83cb194b08f968a3b.js"></script>
+```python
+scheduler = Scheduler("bucket", "/path", s3_resource, s3_client)
+time = nowut() + timedelta(minutes=10)
+key = scheduler.schedule(time, "s3-bucket", "s3_files-important", "content")
+scheduler.stop(key)
+```
 
 In case you want to cancel the schedule event before it occurs
 
@@ -29,7 +63,7 @@ In the following post I’m going to demonstrate how to use S3 as a scheduling m
 
 ## Overview
 
-![Simple S3 flow](https://cdn-images-1.medium.com/max/2000/1*8_iclxSZ_B6M--uGXkNp0Q.png)*Simple S3 flow*
+![Simple S3 flow](https://cdn-images-1.medium.com/max/2000/1*8_iclxSZ_B6M--uGXkNp0Q.png)
 
 S3 alongside a Lambda function creates a simple event base flow, e.g. attach a Lambda to S3 PUT event, create a new file and the Lambda function is called. In order to create a schedule event all you have to do is to write the file you want to act upon on the designated time, however AWS only enables you to create recurring [events using cron or rate expression](https://docs.aws.amazon.com/lambda/latest/dg/tutorial-scheduled-events-schedule-expressions.html), what happens when you want to schedule a one time event? You are stuck.
 
