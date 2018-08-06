@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/efi-mk/s3-scheduler.svg?branch=master)](https://travis-ci.org/efi-mk/s3-scheduler)
+[![codecov](https://codecov.io/gh/efi-mk/s3-scheduler/branch/master/graph/badge.svg)](https://codecov.io/gh/efi-mk/s3-scheduler)
 ## Basic Usage
 
 ### Installation
