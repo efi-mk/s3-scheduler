@@ -7,4 +7,4 @@ do
     pre-commit run ${command} --all-files
 done
 
-python -m unittest
+coverage run --source='.'  -m unittest

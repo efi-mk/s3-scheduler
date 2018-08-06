@@ -17,6 +17,7 @@ deploy:
   password:
     secure: HTUsYrhk7rpqtVDUu11uGx1yhLhd2hb98S7l4rqAOfYV/laWZH4mHH9eMYe8GGyI//Klkm+NVx25Maocl1U79jCElnwk4MloOhU9oF5ncEEL+6x5I+REyAmXESZsbO1ZFHRo0cdvYyNZ1YIjsuzLyXMInXxrFLf609ArgsJIu3lFwnYrrKrDPg5FoBJKNMIhgJZCMVxBz3ddMuqkHmHfbwYckfcL15faI7BA3jeFqBJWVcsLgVeAUpWZ5RrrLbWdiZk/OLbfD3nZvQ8VVs/55d2mkQLKeH2ryvoq6Qqy+eAEi5XDQkEI4+/1K53UCzDv7y515DrMRhWwrxluZeYpryFy1xsk7J788UiL850F99BHSTZGkQRoKvd+FoDhAGR2jGRsFF/sMBeu8OuUzG2vLXXolX6aYnq1ZRwj9p3UtNua3BPuFS6LizG+GBST9S2btav+/CtL0kcSU+jrnagm1lC1JIgqwf4NTyuVs0OpMvo5KUUXoKhRieNWxdkdp89Q63+3ezuCEtDjr9DCkclkE4NiqjJbfCbJfoQqrTTztUxGkCWNnpzOi9jMfBi797vXH09OfilPITlHS6P1OHKz4/XpmgJUs6B5NwSW0TGdkHIHejDmJPxhPAgvi4bUbpuD12vYJdnqnCHNErxrnPA4zIf9Hdm1R2qTwb7UcKQkBz4=
   on:
+    tags: true
     branch: master
 after_success:
 - bash <(curl -s https://codecov.io/bash)
